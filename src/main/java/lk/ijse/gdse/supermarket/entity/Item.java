@@ -1,15 +1,13 @@
 package lk.ijse.gdse.supermarket.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * --------------------------------------------
@@ -36,5 +34,8 @@ public class Item {
 
     @Column(precision = 10, scale = 2) // 0000000000.00 - format, 100 -> 100.00
     private BigDecimal price;
+
+    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
+    private List<OrderDetails> orderDetails;
 
 }
