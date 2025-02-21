@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
+import java.util.Date;
 
 /**
  * --------------------------------------------
@@ -17,22 +17,22 @@ import java.util.List;
  * --------------------------------------------
  **/
 
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @Entity
-@Table (name = "customer")
-public class Customer {
+@Table(name = "orders")
+public class Order {
     @Id
-    @Column(name = "cus_id")
+    @Column(name = "order_id")
     private String id;
 
-    private String name;
-    private String email;
-    private String nic;
-    private String phone;
+    @Column(name = "order_date")
+    private Date orderDate;
 
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-    private List<Order> orders;
+    // customer
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
 }
